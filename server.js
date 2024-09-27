@@ -1,24 +1,41 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const axios = require('axios');
+const path = require('path');  // For serving static files
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Enable CORS for all requests
+// Middleware
 app.use(cors());
+app.use(express.json());
 
-const NEWS_API_KEY = '1bde3b2ab6194cfa8def8d1907b543a6';
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+}).then(() => console.log('MongoDB connected...'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
+// Define the /news route
 app.get('/news', async (req, res) => {
    try {
-      const response = await axios.get(`https://newsapi.org/v2/everything?q=cybersecurity&apiKey=${NEWS_API_KEY}`);
+      const response = await axios.get(`https://newsapi.org/v2/everything?q=cybersecurity&apiKey=${YOUR_API_KEY}`);
       const articles = response.data.articles;
       res.status(200).json(articles);
    } catch (error) {
       console.error('Error fetching news:', error);
-      res.status(500).send('Error fetching news');
+      res.status(500).json({ message: 'Failed to fetch news' });
    }
+});
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Fallback to serve the index.html for other routes
+app.get('*', (req, res) => {
+   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
