@@ -3,7 +3,8 @@ let allArticles = []; // Store all fetched articles for searching
 
 async function fetchNews() {
    try {
-      const response = await fetch('http://localhost:3000/news'); // Ensure backend is running on this port
+      const response = await fetch('http://192.168.0.111:3000/news'); // Updated to use your local IP
+
       const articles = await response.json();
 
       // Debug: Check if articles are being fetched
