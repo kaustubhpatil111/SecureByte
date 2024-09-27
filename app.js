@@ -1,22 +1,18 @@
 const newsContainer = document.getElementById('news-container');
-let allArticles = []; // Store all fetched articles for searching
+let allArticles = [];  // Declare global variable to store all articles
 
+// Fetch news from the backend
 async function fetchNews() {
    try {
-      const response = await fetch('http://192.168.0.111:3000/news'); // Updated to use your local IP
-
+      const response = await fetch('http://localhost:3000/news'); // Ensure backend is running on this port
       const articles = await response.json();
-
-      // Debug: Check if articles are being fetched
-      console.log('Fetched articles:', articles);
-
-      allArticles = articles;  // Store all articles globally
+      
+      allArticles = articles;  // Store articles globally for search functionality
       displayArticles(articles);  // Call the display function with the fetched data
    } catch (error) {
       console.error('Error fetching news:', error);
    }
 }
-
 
 // Function to display articles in the HTML
 function displayArticles(articles) {
@@ -42,26 +38,16 @@ function displayArticles(articles) {
 function searchArticles() {
    const searchTerm = document.getElementById('search-input').value.toLowerCase();
 
-   // Debug: Log the search term
-   console.log('Search term:', searchTerm);
-
+   // Filter the articles based on the search term
    const filteredArticles = allArticles.filter(article => {
-      const title = article.title ? article.title.toLowerCase() : '';  // Default to empty string if null
-      const description = article.description ? article.description.toLowerCase() : '';  // Default to empty string if null
-
-      // Debug: Log titles and descriptions being checked
-      console.log('Checking article:', { title, description });
-
+      const title = article.title ? article.title.toLowerCase() : '';
+      const description = article.description ? article.description.toLowerCase() : '';
       return title.includes(searchTerm) || description.includes(searchTerm);
    });
-
-   // Debug: Log the filtered results
-   console.log('Filtered articles:', filteredArticles);
 
    // Display the filtered articles
    displayArticles(filteredArticles);
 }
-
 
 // Fetch the news when the page loads
 fetchNews();
