@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 // Define your News API key
-const NEWS_API_KEY = 'YOUR_API_KEY';  // Replace with your actual News API key
+const NEWS_API_KEY = '1bde3b2ab6194cfa8def8d1907b543a6';  // Replace with your actual News API key
 
 // Route to fetch news
 app.get('/news', async (req, res) => {
