@@ -4,7 +4,8 @@ let allArticles = [];  // Declare global variable to store all articles
 // Fetch news from the backend
 async function fetchNews() {
    try {
-      const response = await fetch('http://localhost:3000/news'); // Ensure backend is running on this port
+      const response = await fetch('https://securebyte.railway.app/news');
+ // Ensure backend is running on this port
       const articles = await response.json();
       
       allArticles = articles;  // Store articles globally for search functionality
