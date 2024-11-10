@@ -1,10 +1,10 @@
 const NEWS_API_KEY = '7b25a46ee1504776b141fb0da6acb109'; // NewsAPI key
-const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'; // Use a CORS proxy
 
 const newsContainer = document.getElementById('news-container');
 const topNewsContainer = document.getElementById('top-news-container');
-let allArticles = []; // Global array to store articles for searching
-let upvotes = {}; // Object to track upvotes
+let allArticles = [];
+let upvotes = {};
 
 // Fetch general cybersecurity news for Trending section
 async function fetchTrendingNews() {
@@ -27,7 +27,6 @@ async function fetchTopNews() {
     try {
         console.log("Fetching top cybersecurity news...");
 
-        // Fetch articles for each topic and accumulate results
         for (const topic of topics) {
             const response = await fetch(`${CORS_PROXY}https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`);
             const data = await response.json();
@@ -37,7 +36,6 @@ async function fetchTopNews() {
             }
         }
 
-        // Remove duplicates based on article URL and limit to 5
         const uniqueArticles = Array.from(new Map(allArticles.map(article => [article.url, article])).values()).slice(0, 5);
 
         if (uniqueArticles.length > 0) {
@@ -50,8 +48,6 @@ async function fetchTopNews() {
         topNewsContainer.innerHTML = '<p>Failed to load top news. Please try again later.</p>';
     }
 }
-
-
 
 // Function to display a slideshow for top news
 function displaySlideshow(articles) {
