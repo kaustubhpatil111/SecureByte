@@ -1,4 +1,5 @@
 const NEWS_API_KEY = '7b25a46ee1504776b141fb0da6acb109'; // NewsAPI key
+const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 
 const newsContainer = document.getElementById('news-container');
 const topNewsContainer = document.getElementById('top-news-container');
@@ -8,7 +9,7 @@ let upvotes = {}; // Object to track upvotes
 // Fetch general cybersecurity news for Trending section
 async function fetchTrendingNews() {
     try {
-        const response = await fetch(`https://newsapi.org/v2/everything?q=cybersecurity&apiKey=${NEWS_API_KEY}`);
+        const response = await fetch(`${CORS_PROXY}https://newsapi.org/v2/everything?q=cybersecurity&apiKey=${NEWS_API_KEY}`);
         const data = await response.json();
         allArticles = data.articles ? data.articles.filter(article => !article.title.includes("[Removed]")) : [];
         sortAndDisplayArticles();
@@ -28,7 +29,7 @@ async function fetchTopNews() {
 
         // Fetch articles for each topic and accumulate results
         for (const topic of topics) {
-            const response = await fetch(`https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`);
+            const response = await fetch(`${CORS_PROXY}https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`);
             const data = await response.json();
 
             if (data.articles) {
@@ -49,7 +50,6 @@ async function fetchTopNews() {
         topNewsContainer.innerHTML = '<p>Failed to load top news. Please try again later.</p>';
     }
 }
-
 
 
 
