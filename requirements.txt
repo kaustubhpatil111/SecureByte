@@ -1,0 +1,6 @@
+Flask
+flask-cors
+requests
+flask-apscheduler
+beautifulsoup4
+lxml
