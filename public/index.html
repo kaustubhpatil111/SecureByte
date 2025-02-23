@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybersecurity News & Malware Campaigns</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <header>
+      <h1>Cybersecurity News & Malware Campaigns</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="#home" onclick="fetchTrendingNews()">Home</a>
+          </li>
+          <li>
+            <a
+              href="#data-breaches"
+              onclick="fetchCategoryNews('Data Breaches')"
+              >Data Breaches</a
+            >
+          </li>
+          <li>
+            <a
+              href="#cyber-attacks"
+              onclick="fetchCategoryNews('Cyber Attacks')"
+              >Cyber Attacks</a
+            >
+          </li>
+          <li>
+            <a
+              href="#vulnerabilities"
+              onclick="fetchCategoryNews('Vulnerabilities')"
+              >Vulnerabilities</a
+            >
+          </li>
+          <li>
+            <a href="#webinars" onclick="fetchCategoryNews('Webinars')"
+              >Webinars</a
+            >
+          </li>
+          <li>
+            <a
+              href="#expert-insights"
+              onclick="fetchCategoryNews('Expert Insights')"
+              >Expert Insights</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search for news..."
+          oninput="searchArticles()"
+        />
+      </div>
+    </header>
+
+    <!-- Slideshow for Top News (Only on Home Page) -->
+    <section id="top-news-container">
+      <h2>Top News</h2>
+      <div class="slideshow"></div>
+      <div class="slide-controls">
+        <button class="prev-btn">Prev</button>
+        <div class="dots"></div>
+        <button class="next-btn">Next</button>
+      </div>
+    </section>
+
+    <!-- Main Content Section for Articles -->
+    <main id="news-container">
+      <!-- News articles will be dynamically populated here by app.js -->
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>&copy; 2024 Cybersecurity News. All rights reserved.</p>
+      <div>
+        <a href="/privacy">Privacy Policy</a> |
+        <a href="https://twitter.com/yourpage" target="_blank">Twitter</a>
+      </div>
+    </footer>
+
+    <!-- Link to JavaScript file -->
+    <script src="app.js"></script>
+  </body>
+</html>
